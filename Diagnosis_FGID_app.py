@@ -5,7 +5,7 @@ Created on Sat Apr 22 16:54:22 2023
 @author: ElaheMsvi: el.msvi@gmail.com
 """
 
-from Modulel_Diagnosis import *
+from Module_Diagnosis import *
 import streamlit as st
 import pandas as pd
 import numpy as np
