@@ -46,14 +46,16 @@ if st.button("Click here to predict"):
     clf.load_and_clean_data(df)
     pred_test = clf.predicted_outputs()
     st.success('The output is as follows\n (The last cloumns indicate the most probable clusters for each case) ')
-    st.balloons()
+    #st.balloons()
     st.dataframe(pred_test)
     #st.write(pred_test)
 
 if st.button("Download output file"): 
-    pred_test.to_csv('output.csv', index=None)
-    with open('output.csv', 'rb') as f: 
-        st.download_button('Download output file', f, file_name="output.csv")
+    st.success('Maybe later ...')
+
+#    pred_test.to_csv('output.csv', index=None)
+#    with open('output.csv', 'rb') as f: 
+#        st.download_button('Download output file', f, file_name="output.csv")
 
     
     
