@@ -28,7 +28,7 @@ if choice == "Upload":
     if file: 
         df = pd.read_csv(file, index_col=None)
 #        df.to_csv('dataset.csv', index=None)
-        st.dataframe(df)
+        #st.dataframe(df)
 
 if choice == "Profiling": 
     st.title("Input the Patient Symptoms")
@@ -45,10 +45,10 @@ if st.button("Click here to predict"):
     clf = FGID_Diagnosis('model1.pkl')
     clf.load_and_clean_data(df)
     pred_test = clf.predicted_outputs()
-    st.dataframe(pred_test)
+    #st.dataframe(pred_test)
     st.success('The output is as follows\n (The last cloumns indicate the most probable clusters for each case) ')
     st.balloons()
-    st.write(pred_test)
+    #st.write(pred_test)
 
 if st.button("Download output file"): 
     pred_test.to_csv('output.csv', index=None)
