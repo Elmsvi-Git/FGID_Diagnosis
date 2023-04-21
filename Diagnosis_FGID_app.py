@@ -21,7 +21,7 @@ with st.sidebar:
     st.image("https://magazine.jhsph.edu/sites/default/files/styles/feature_image_og_image/public/GutBrain_3200x1600.jpg?itok=RqUR2Y2C")
     st.title("Gut-Brain Disorders Diagnosis")
     choice = st.radio("Navigation", ["Upload","Profiling"])
-    st.info("This application helps you to classify patients based on GI symptoms")
+    st.info("This application helps you to classify patients based on gastrointestinal and psychological symptoms")
 
 if choice == "Upload":
     st.title("Upload Your Dataset")
