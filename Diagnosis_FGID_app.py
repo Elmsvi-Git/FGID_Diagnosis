@@ -49,10 +49,10 @@ if st.button("Click here to predict"):
     st.write(pred_test)
     st.success('The output is as follows\n (The last cloumns indicate the most probable clusters for each case) ')
 
-if choice == "Download": 
+if st.button("Download output file"): 
     pred_test.to_csv('output.csv', index=None)
     with open('output.csv', 'rb') as f: 
-        st.download_button('Download Model', f, file_name="output.csv")
+        st.download_button('Download output file', f, file_name="output.csv")
 
     
     
