@@ -59,7 +59,7 @@ if st.button("Download output file"):
 #        st.download_button('Download output file', f, file_name="output.csv")
 
 if st.button("Learn about the clusters"): 
-    image = Image.open("https://github.com/Elmsvi-Git/FGID_Diagnosis/blob/main/Images/Cluster1.png")
+    image = Image.open("Cluster1.png")
     st.image(image, caption='Cluster 15')
 
 
