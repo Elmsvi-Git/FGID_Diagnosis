@@ -57,5 +57,10 @@ if st.button("Download output file"):
 #    with open('output.csv', 'rb') as f: 
 #        st.download_button('Download output file', f, file_name="output.csv")
 
+if st.button("Learn about the clusters"): 
+    st.image("/Images/CLuster1.png")
+
+
+
     
     
