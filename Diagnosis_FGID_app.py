@@ -12,6 +12,7 @@ import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
 import os 
+from PIL import Image
 
 #if os.path.exists('./dataset.csv'): 
 #    df = pd.read_csv('dataset.csv', index_col=None)
