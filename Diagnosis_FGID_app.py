@@ -24,7 +24,7 @@ with st.sidebar:
 
 if choice == "Upload":
     st.title("Upload Your Dataset")
-    file = st.file_uploader("Upload Your Dataset" , , type ={"csv"})
+    file = st.file_uploader("Upload Your Dataset" , type ={"csv"})
     if file: 
         df = pd.read_csv(file, index_col=None)
 #        df.to_csv('dataset.csv', index=None)
