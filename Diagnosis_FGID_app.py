@@ -19,7 +19,7 @@ import os
 with st.sidebar: 
     st.image("https://magazine.jhsph.edu/sites/default/files/styles/feature_image_og_image/public/GutBrain_3200x1600.jpg?itok=RqUR2Y2C")
     st.title("FGID Diagnosis")
-    choice = st.radio("Navigation", ["Upload","Profiling","Diagnosis", "Download"])
+    choice = st.radio("Navigation", ["Upload","Profiling","Download"])
     st.info("This application helps you to classify patients based on GI symptoms")
 
 if choice == "Upload":
@@ -49,3 +49,10 @@ if st.button("Click here to predict"):
     st.write(pred_test)
     st.success('The output is as follows\n (The last cloumns indicate the most probable clusters for each case) ')
 
+if choice == "Download": 
+    pred_test.to_csv('output.csv', index=None)
+    with open('output.csv', 'rb') as f: 
+        st.download_button('Download Model', f, file_name="output.csv")
+
+    
+    
