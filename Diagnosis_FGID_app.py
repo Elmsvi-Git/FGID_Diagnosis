@@ -24,7 +24,7 @@ with st.sidebar:
 
 if choice == "Upload":
     st.title("Upload Your Dataset")
-    file = st.file_uploader("Upload Your Dataset" , type ={"csv"})
+    file = st.file_uploader(" " , type ={"csv"})
     if file: 
         df = pd.read_csv(file, index_col=None)
 #        df.to_csv('dataset.csv', index=None)
@@ -46,9 +46,9 @@ if st.button("Click here to predict"):
     clf.load_and_clean_data(df)
     pred_test = clf.predicted_outputs()
     st.dataframe(pred_test)
+    st.success('The output is as follows\n (The last cloumns indicate the most probable clusters for each case) ')
     st.balloons()
     st.write(pred_test)
-    st.success('The output is as follows\n (The last cloumns indicate the most probable clusters for each case) ')
 
 if st.button("Download output file"): 
     pred_test.to_csv('output.csv', index=None)
