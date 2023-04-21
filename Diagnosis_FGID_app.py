@@ -19,7 +19,7 @@ import os
 with st.sidebar: 
     st.image("https://magazine.jhsph.edu/sites/default/files/styles/feature_image_og_image/public/GutBrain_3200x1600.jpg?itok=RqUR2Y2C")
     st.title("FGID Diagnosis")
-    choice = st.radio("Navigation", ["Upload","Profiling","Download"])
+    choice = st.radio("Navigation", ["Upload","Profiling"])
     st.info("This application helps you to classify patients based on GI symptoms")
 
 if choice == "Upload":
@@ -45,6 +45,7 @@ if st.button("Click here to predict"):
     clf = FGID_Diagnosis('model1.pkl')
     clf.load_and_clean_data(df)
     pred_test = clf.predicted_outputs()
+    st.dataframe(pred_test)
     st.balloons()
     st.write(pred_test)
     st.success('The output is as follows\n (The last cloumns indicate the most probable clusters for each case) ')
