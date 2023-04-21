@@ -59,8 +59,8 @@ if st.button("Download output file"):
 #        st.download_button('Download output file', f, file_name="output.csv")
 
 if st.button("Learn about the clusters"): 
-    image = Image.open("Cluster1.png")
-    st.image(image, caption='Cluster 15')
+    image = Image.open("Clusters.jpg")
+    st.image(image, caption='Complex Clusters')
 
 
 
