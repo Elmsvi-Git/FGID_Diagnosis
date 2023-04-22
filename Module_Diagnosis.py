@@ -45,9 +45,12 @@ class FGID_Diagnosis():
                 most_prob_classes = np.zeros([self.data.shape[0], 4])
                 most_prob_classes[: , [0,2]] = np.argsort(pred , axis = 1)[:,[-1,-2]]+1
                 most_prob_classes[: , [1,3]] = np.round(np.sort(pred, axis = 1)[:,[-1,-2]],4)
-                self.df_with_predictions['Most_prob_Cluster1'] = most_prob_classes[:,0]
-                self.df_with_predictions['Probability1'] = most_prob_classes[:,1]
-                self.df_with_predictions['Most_prob_Cluster2'] = most_prob_classes[:,2]
-                self.df_with_predictions['Probability2'] = most_prob_classes[:,3]
-                return self.df_with_predictions
+                most_prob_classes_df = pd.DataFrame(data = most_prob_classes, columns = ['Most_prob_Cluster1','Probability1','Most_prob_Cluster2','Probability2'])
+                #self.prob_df_with_predictions = most_prob_classes_df.copy()
+                self.prob_df_with_predictions = pd.concat([most_prob_classes_df , self.df_with_predictions] , axis = 1)
+                #self.df_with_predictions['Most_prob_Cluster1'] = most_prob_classes[:,0]
+                #self.df_with_predictions['Probability1'] = most_prob_classes[:,1]
+                #self.df_with_predictions['Most_prob_Cluster2'] = most_prob_classes[:,2]
+                #self.df_with_predictions['Probability2'] = most_prob_classes[:,3]
+                return self.prob_df_with_predictions
 
