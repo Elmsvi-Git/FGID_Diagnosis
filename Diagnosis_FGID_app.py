@@ -46,7 +46,7 @@ if st.button("Click here to predict"):
     clf = FGID_Diagnosis('model1.pkl')
     clf.load_and_clean_data(df)
     pred_test = clf.predicted_outputs()
-    st.success('The output is as follows\n (The last cloumns indicate the most probable clusters for each case) ')
+    st.success('The output is as follows: ')
     #st.balloons()
     st.dataframe(pred_test)
     #st.write(pred_test)
