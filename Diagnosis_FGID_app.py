@@ -33,6 +33,8 @@ if choice == "Upload":
 
 if choice == "Profiling": 
     st.title("Input the Patient Symptoms")
+    st.info("This Section is not complete yet....")
+
 #    profile_df = df.profile_report()
 #    st_profile_report(profile_df)
     Options1 = ['Never' , 'Less than one day a month' , 'One day a month' , 'Two to three days a month' , 'Once a week' , 'Two to three days a week' ,'Most days','Every day','Multiple times per day or all the time']
