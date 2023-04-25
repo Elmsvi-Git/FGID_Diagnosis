@@ -17,6 +17,11 @@ from PIL import Image
 #if os.path.exists('./dataset.csv'): 
 #    df = pd.read_csv('dataset.csv', index_col=None)
 
+# @st.cache_data
+def convert_df(df):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return df.to_csv(index=False).encode('utf-8')
+
 with st.sidebar: 
     st.image("https://magazine.jhsph.edu/sites/default/files/styles/feature_image_og_image/public/GutBrain_3200x1600.jpg?itok=RqUR2Y2C")
     st.title("Gut-Brain Disorders Diagnosis")
@@ -25,6 +30,13 @@ with st.sidebar:
 
 if choice == "Upload":
     st.title("Upload Your Dataset")
+    
+    st.info("You can download a sample input file from here:")
+    input_file = pd.read_csv('sample_file.csv' , index_col=None)
+    csv = convert_df(input_file)
+    st.download_button(label="Download data as CSV", data=csv,
+                       file_name='sample_input.csv',mime='text/csv' )
+    
     file = st.file_uploader(" " , type ={"csv"})
     if file: 
         df = pd.read_csv(file, index_col=None)
@@ -45,20 +57,20 @@ if choice == "Profiling":
 
 
 if st.button("Click here to predict"): 
-    clf = FGID_Diagnosis('model1.pkl')
+    clf = FGID_Diagnosis('model2.pkl')
     clf.load_and_clean_data(df)
     pred_test = clf.predicted_outputs()
     st.success('The output is as follows: ')
     #st.balloons()
     st.dataframe(pred_test)
-    #st.write(pred_test)
+    # st.write(pred_test)
 
 if st.button("Download output file"): 
-    st.success('Maybe later ...')
-
-#    pred_test.to_csv('output.csv', index=None)
-#    with open('output.csv', 'rb') as f: 
-#        st.download_button('Download output file', f, file_name="output.csv")
+    st.success('Maybe later ...')    
+    # csv_out = convert_df(pred_test)
+    # pred_test.to_csv('output.csv', index=None)
+    # st.download_button(label="Download out out data as CSV", data=csv_out,
+    #                    file_name='output_file.csv',mime='text/csv' )
 
 if st.button("Learn about the clusters"): 
     image = Image.open("Clusters.jpg")
@@ -68,4 +80,4 @@ if st.button("Learn about the clusters"):
 
 
     
-    
+  
