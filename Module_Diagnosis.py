@@ -271,7 +271,7 @@ def get_profile():
     df_prof['R38'] = options_map_radio(R38)
     if R38 !='Never': 
         df_prof['R39'] = options_map_box(st.selectbox('**R39. Has it been 6 months or longer since you started having this belching that was severe enough to interfere with your usual activities?**', Options_YN))
-    R40 = st.radio('**R40. In the last 3 months, how often did you have pain anywhere in your abdomen?', Options1)
+    R40 = st.radio('**R40. In the last 3 months, how often did you have pain anywhere in your abdomen?**', Options1)
     df_prof['R40'] = options_map_radio(R40)
     if R40 !='Never': 
         df_prof['R41'] = options_map_slider(st.slider('**R41. How often did this pain in your abdomen happen close in time to a bowel movement -- just before, during, or soon after? (Percent of times with pain)**' , 0, 100, 0, 10))
