@@ -43,6 +43,13 @@ if choice == "Upload":
         df = pd.read_csv(file, index_col=None)
 #        df.to_csv('dataset.csv', index=None)
         #st.dataframe(df)
+        
+        # if file is not None:
+        #     file_details = {"FileName":file.name,"FileType":file.type}
+        #     st.write(file_details)
+        #     with open(os.path.join("tempDir",file.name),"wb") as f: 
+        #       f.write(file.getbuffer())         
+        #     st.success("Saved File")
 
 if choice == "Profiling": 
     st.title("Input the Patient Symptoms")
@@ -68,3 +75,7 @@ if st.button("Learn about the clusters"):
     st.image(image, caption='Complex Clusters')
 
 
+
+
+    
+    
