@@ -266,7 +266,7 @@ def get_profile():
         df_prof['R6'] = options_map_box(st.selectbox('**R6. Has it been 6 months or longer since you started having this pain in the middle of your chest?**', Options_YN))
         df_prof['R7'] = options_map_slider(st.slider('**R7. When you had this chest pain, how often did it feel like burning? (Percent of times with this chest pain)**', 0, 100, 0, 10))
         df_prof['R8'] = options_map_slider(st.slider('**R8. When you had this symptom of chest pain, how often was it associated with food sticking after swallowing? (Percent of times with this chest pain)**', 0, 100, 0, 10))
-    R9 = st.radio('**R9. In the last 3 months, how often did you have heartburn (a burning discomfort or burning pain in your chest)?**', Options_YN)
+    R9 = st.radio('**R9. In the last 3 months, how often did you have heartburn (a burning discomfort or burning pain in your chest)?**', Options1)
     df_prof['R9'] = options_map_radio(R9)
     if R9!='Never':
         df_prof['R11'] = options_map_box(st.selectbox('**R11. Has it been 6 months or longer since you started having this heartburn (burning discomfort or burning pain in your chest)?**', Options_YN))
