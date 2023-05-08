@@ -60,13 +60,17 @@ if choice == "Profiling":
     df = df_prof.copy()
     
 if st.button("Click here to predict"): 
-    clf = FGID_Diagnosis('model2.pkl')
+    clf = FGID_Diagnosis('model2.pkl' , 'sc_train.pkl','Data_Clusters.txt')
     clf.load_and_clean_data(df)
     pred_test = clf.predicted_outputs()
     st.success('The output is as follows: ')
     # st.dataframe(pred_test)
     st.write(pred_test)
-    
+    if df.shape[0]==1:
+        fig_one_smaple = clf.plot_sample()
+        if fig_one_smaple:
+            st.plotly_chart(fig_one_smaple, use_container_width=True)
+
     csv = convert_df(pred_test)
     st.download_button(label="Download output file as .csv",data=csv, file_name='output.csv',mime='text/csv',)
 
@@ -75,7 +79,3 @@ if st.button("Learn about the clusters"):
     st.image(image, caption='Complex Clusters')
 
 
-
-
-    
-    
