@@ -1,8 +1,10 @@
 autopep8==1.6.0
 brotlipy==0.7.0
 flake8==6.0.0
-matplotlib==3.7.1
+kaleido==0.2.1
+mycolorpy==1.5.1
 pip-chill==1.0.3
+plotly==5.14.1
 pydocstyle==6.3.0
 pyopenssl==23.0.0
 pyreadstat==1.2.1
