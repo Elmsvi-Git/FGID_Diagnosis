@@ -11,10 +11,17 @@ import numpy as np
 import pandas as pd
 import pickle
 import streamlit as st
+from mycolorpy import colorlist as mcp
+from matplotlib import pyplot as plt
+import plotly.io as pio
+import plotly.graph_objects as go
+pio.renderers
 
 class FGID_Diagnosis():
       
-        def __init__(self, model_file):
+        def __init__(self, model_file , sc_file , data_clusters):
+            self.data_train_clusters = np.loadtxt(data_clusters)    
+            self.sc_clusters = pickle.load(open(sc_file,'rb'))
             self.clf = pickle.load(open(model_file,'rb'))
             self.data = None
 ###################################################################################       
@@ -68,21 +75,21 @@ class FGID_Diagnosis():
         # a function which outputs 0 or 1 based on our model
         def predicted_output_category(self):
             if (self.data_selected is not None):
-                pred_outputs = self.clf.predict(self.data_selected)
-                return pred_outputs
+                self.pred_outputs = self.clf.predict(self.data_selected)
+                return self.pred_outputs
 ###################################################################################        
         # predict the outputs and the probabilities and 
         # add columns with these values at the end of the new data
         def predicted_outputs(self):
             if (self.data is not None):
-                patient = self.Healty_detection()
-                pred = self.predicted_probability()
+                self.patient = self.Healty_detection()
+                self.pred = self.predicted_probability()
                 most_prob_classes = np.zeros([self.data.shape[0], 4])
                 # most_prob_classes[: , [0,2]] = np.argsort(pred , axis = 1)[:,[-1,-2]]+1
-                most_prob_classes[patient , 0] = np.argsort(pred , axis = 1)[patient,-1]+1
-                most_prob_classes[patient , 2] = np.argsort(pred , axis = 1)[patient,-2]+1
-                most_prob_classes[patient , 1] = np.round(np.sort(pred, axis = 1)[patient,-1],4)
-                most_prob_classes[patient , 3] = np.round(np.sort(pred, axis = 1)[patient,-2],4)
+                most_prob_classes[self.patient , 0] = np.argsort(self.pred , axis = 1)[self.patient,-1]+1
+                most_prob_classes[self.patient , 2] = np.argsort(self.pred , axis = 1)[self.patient,-2]+1
+                most_prob_classes[self.patient , 1] = np.round(np.sort(self.pred, axis = 1)[self.patient,-1],4)
+                most_prob_classes[self.patient , 3] = np.round(np.sort(self.pred, axis = 1)[self.patient,-2],4)
                 most_prob_classes_df1 = pd.DataFrame(data = self.cluster_map(most_prob_classes[:,0]) , columns = ['Most_Prob_Cluster_First_rank'])
                 most_prob_classes_df2 = pd.DataFrame(data = self.cluster_map(most_prob_classes[:,2]), columns = ['Most_Prob_Cluster_Second_rank'])
                 prob_classes_df1 = pd.DataFrame(data = most_prob_classes[:,1] , columns = ['Prob1'])
@@ -157,6 +164,44 @@ class FGID_Diagnosis():
             patient = Glbs|CP|HB|FDg|PDS|ES|EPS|N|V|CV|CHS|RS|B|IBS|HS|L3D|SD|IE|AO|MM|OPC|FD|FB|CMAP|BP|FI|AP
             
             return patient
+        
+        def plot_sample(self):
+            no_clusters = 27
+            color1=mcp.gen_color(cmap="hsv",n=no_clusters+1)#'nipy_spectral', 'gist_ncar'
+            if int(self.patient):
+                test_label = np.argmax(self.pred)+1
+                test_transformed = self.sc_clusters.transform(self.data_selected)
+                c = color1[test_label]
+                plt.subplots_adjust(left=0, right=1, bottom=0, top=1)
+                
+                fig = go.Figure()    
+                fig.add_trace(go.Scatterpolar(
+                    r= self.data_train_clusters[0 , :],
+                    theta= self.data_selected.keys(),fill= 'toself',
+                    name= 'Overall mean'))
+    
+                fig.add_trace(go.Scatterpolar(
+                    r=self.data_train_clusters[test_label, :], 
+                    theta= self.data_selected.keys(),
+                    fill= 'toself',line = dict(color=c),
+                    name= self.cluster_map(list([test_label]))[0]))
+                
+                fig.add_trace(go.Scatterpolar(
+                    r= np.mean(test_transformed, axis = 0),
+                    theta= self.data_selected.keys(),
+                    fill= 'toself',line = dict(color='red'),
+                    name= 'Patient' ))  
+    
+                fig.update_layout(
+                    font_size = 13,showlegend = True,polar = dict(
+                    bgcolor = "rgb(233, 233, 233)",angularaxis = dict(
+                    linewidth = 2,showline=True,linecolor='black'),
+                    radialaxis = dict(side = "counterclockwise",showline = True,
+                    linewidth = 2,gridcolor = "white",gridwidth = 2,range=[-1, 2])),
+                    )
+                fig.show(renderer="png")  
+                plt.tight_layout()
+                return fig
         
         
 def options_map_radio(option):
