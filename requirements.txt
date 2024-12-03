@@ -12,7 +12,6 @@ pysocks==1.7.1
 pyyaml==6.0
 rope==1.7.0
 sip==6.6.2
-spyder==5.4.3
 streamlit==1.21.0
 unidecode==1.2.0
 whatthepatch==1.0.2
