@@ -11,7 +11,6 @@ pyreadstat==1.2.1
 pysocks==1.7.1
 pyyaml==6.0
 rope==1.7.0
-scikit-learn==1.2.2
 sip==6.6.2
 spyder==5.4.3
 streamlit==1.21.0
