@@ -1,6 +1,3 @@
-# This file may be used to create an environment using:
-# $ conda create --name <env> --file <this file>
-# platform: win-64
 _openmp_mutex=4.5=2_gnu
 altair=5.5.0=pyhd8ed1ab_0
 asttokens=3.0.0=pyhd8ed1ab_1
